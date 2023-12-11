@@ -6,8 +6,8 @@ const createCourse = async (req: Request, res: Response) => {
    const { startDate, endDate } = req.body;
 
  
-   const startDateTime = new Date(startDate);
-   const endDateTime = new Date(endDate);
+   const startDateTime:any = new Date(startDate);
+   const endDateTime:any = new Date(endDate);
    // if (isNaN(startDateTime) || isNaN(endDateTime)) {
    //   throw new Error('Invalid date format');
    // }
