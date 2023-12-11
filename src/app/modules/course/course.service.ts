@@ -7,7 +7,20 @@ const createCourseIntoDB = async(payload: TCourse)=>{
   return result;
 }
 
+const getSingleCourseByIdWithReviewsFromDB = async (courseId: string) => {
+  const result = await Course.findById(courseId)
+    // .populate('courseId')
+    // .populate({
+    //   path: 'academicDepartment',
+    //   populate: {
+    //     path: 'academicFaculty',
+    //   },
+    // });
+  return result;
+ };
 
+ 
 export const CourseServices = {
  createCourseIntoDB,
+ getSingleCourseByIdWithReviewsFromDB
 }

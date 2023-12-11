@@ -27,7 +27,7 @@ const createReview = async (req: Request, res: Response) => {
    res.status(500).json({
      success: false,
      statusCode: 500,
-     message: 'Review creation failed',
+     message: 'Review create failed',
      data: error,
    });
  }
