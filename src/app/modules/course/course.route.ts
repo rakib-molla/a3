@@ -7,4 +7,6 @@ router.post('/courses',CourseControllers.createCourse);
 
 router.get('/courses/:courseId/reviews',CourseControllers.getSingleCourseByIdWithReviews);
 
+router.get('/course/best',CourseControllers.getTheBestCourseBasedOnAverageReview);
+
 export const CourseRoutes = router;
