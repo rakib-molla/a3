@@ -13,7 +13,7 @@ export const detailsValidationSchema = z.object({
  description: z.string(),
 })
 
-const courseValidationSchema = z.object({
+const createCourseValidationSchema = z.object({
  title: z.string({
   required_error: 'Title is Required',
   invalid_type_error: 'Title Must Be String'
@@ -30,4 +30,6 @@ const courseValidationSchema = z.object({
  details: z.string(detailsValidationSchema),
 })
 
-export default courseValidationSchema;
+export const courseValidationSchema ={
+ createCourseValidationSchema,
+}
