@@ -38,6 +38,7 @@ const createCourse = async (req: Request, res: Response) => {
 const getSingleCourseByIdWithReviews = async (req: Request, res: Response) => {
   try {
     const { courseId } = req.params;
+    // find specific review using courseId section 
     const review = await ReviewModel.find({courseId});
     const result = await CourseServices.getSingleCourseByIdWithReviewsFromDB(courseId);
     res.status(200).json({
