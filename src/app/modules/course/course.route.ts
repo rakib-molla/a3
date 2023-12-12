@@ -9,4 +9,6 @@ router.get('/courses/:courseId/reviews',CourseControllers.getSingleCourseByIdWit
 
 router.get('/course/best',CourseControllers.getTheBestCourseBasedOnAverageReview);
 
+router.get('/courses',CourseControllers.getPaginateAndFilteringSearch);
+
 export const CourseRoutes = router;

@@ -19,8 +19,15 @@ const getSingleCourseByIdWithReviewsFromDB = async (courseId: string) => {
   return result; 
  }
  
+ const getPaginateAndFilteringSearchFromDB = async()=>{
+  
+  const  result = await Course.find();
+  return result;
+ }
+
 export const CourseServices = {
  createCourseIntoDB,
  getSingleCourseByIdWithReviewsFromDB,
- getTheBestCourseBasedOnAverageReviewFromDB
+ getTheBestCourseBasedOnAverageReviewFromDB,
+ getPaginateAndFilteringSearchFromDB
 }

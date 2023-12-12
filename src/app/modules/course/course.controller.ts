@@ -98,11 +98,62 @@ const getTheBestCourseBasedOnAverageReview = async (req: Request, res: Response)
   }
 };
 
+const getPaginateAndFilteringSearch  = async (req: Request, res: Response) =>{
+  try {
+    // Parse query parameters
+    const { page = '1', limit = '10', sortBy, sortOrder, minPrice, maxPrice, tags, startDate, endDate, language, provider, durationInWeeks, level } = req.query;
 
+    // Build the filter object based on query parameters
+    const filter: any = {};
+    if (minPrice) filter.price = { $gte: parseFloat(minPrice as string) };
+    if (maxPrice) filter.price = { ...filter.price, $lte: parseFloat(maxPrice as string) };
+    if (tags) filter['tags.name'] = tags as string;
+    if (startDate) filter.startDate = { $gte: new Date(startDate as string) };
+    if (endDate) filter.endDate = { $lte: new Date(endDate as string) };
+    if (language) filter.language = language as string;
+    if (provider) filter.provider = provider as string;
+    if (durationInWeeks) filter.durationInWeeks = parseInt(durationInWeeks as string, 10);
+    if (level) filter['details.level'] = level as string;
+
+    // Build the sort object based on sortBy and sortOrder
+    const sort: any = {};
+    if (sortBy) sort[sortBy as string] = sortOrder === 'desc' ? -1 : 1;
+
+    // Perform the query with pagination and filtering
+    const courses = await Course.find(filter)
+      .sort(sort)
+      .skip((parseInt(page as string, 10) - 1) * parseInt(limit as string, 10))
+      .limit(parseInt(limit as string, 10));
+
+    // Get the total count of courses
+    const total: number = await Course.countDocuments(filter);
+
+    res.status(200).json({
+      success: true,
+      statusCode: 200,
+      message: 'Courses retrieved successfully',
+      meta: {
+        page: parseInt(page as string, 10),
+        limit: parseInt(limit as string, 10),
+        total,
+      },
+      data: courses,
+    });
+  } catch (error) {
+    
+    res.status(500).json({
+      success: false,
+      statusCode: 500,
+      message: 'Error retrieving courses',
+      data: error,
+    });
+  }
+};
 
 
 export const CourseControllers = {
   createCourse,
   getSingleCourseByIdWithReviews,
-  getTheBestCourseBasedOnAverageReview
+  getTheBestCourseBasedOnAverageReview,
+  getPaginateAndFilteringSearch,
 };
