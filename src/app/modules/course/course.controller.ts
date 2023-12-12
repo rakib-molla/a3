@@ -3,16 +3,17 @@ import { Request, Response } from 'express';
 import { CourseServices } from './course.service';
 import { ReviewModel } from './../review/review.model';
 import { Course } from './course.model';
+import catchAsync from '../../utils/catchAsync';
+import sendResponse from '../../utils/sendResponse';
+import httpStatus from 'http-status';
 
 
-const createCourse = async (req: Request, res: Response) => {
-  try {
+const createCourse = catchAsync(async (req, res) =>  {
+ 
     const { startDate, endDate } = req.body;
 
     const startDateTime: any = new Date(startDate);
     const endDateTime: any = new Date(endDate);
-
-
     // duration calculate for weeks
     const durationInWeeks = Math.ceil(
       (endDateTime - startDateTime) / (1000 * 60 * 60 * 24 * 7),
@@ -22,20 +23,13 @@ const createCourse = async (req: Request, res: Response) => {
     const data = req.body;
     const result = await CourseServices.createCourseIntoDB(data);
 
-    res.status(200).json({
+    sendResponse(res, {
       success: true,
-      statusCode: 200,
+      statusCode: httpStatus.CREATED,
       message: 'Course created successfully',
       data: result,
     });
-  } catch (error) {
-    res.status(500).json({
-      success: false,
-      message: 'Course creation failed',
-      data: error,
-    });
-  }
-};
+});
 
 const getSingleCourseByIdWithReviews = async (req: Request, res: Response) => {
   try {
