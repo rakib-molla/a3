@@ -28,12 +28,19 @@ export const createCourseValidationSchema = z.object({
   instructor: z.string(),
   categoryId: z.string(),
   price: z.number(),
-  tags: z.array(tagsValidationSchema),
+  // tags: z.array(tagsValidationSchema),
+   tags: z.array(
+    z.object({
+      name: z.string(),
+      isDeleted: z.boolean(),
+    })
+  ),
+
   startDate: z.string(),
   endDate: z.string(),
   language: z.string(),
   provider: z.string(),
-  durationInWeeks: z.number(),
+  durationInWeeks: z.number().optional(),
   details: detailsValidationSchema,
 });
 
@@ -42,7 +49,7 @@ export const updateCourseValidationSchema = z.object({
   instructor: z.string().optional(),
   categoryId: z.string().optional(),
   price: z.number().optional(),
-  
+  tags: z.array(updateTagsValidationSchema).optional(),
   startDate: z.string().optional(),
   endDate: z.string().optional(),
   language: z.string().optional(),

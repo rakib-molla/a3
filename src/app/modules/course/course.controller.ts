@@ -151,8 +151,7 @@ const updateSingleCourse = catchAsync(async (req, res) =>  {
   
   const { courseId } = req.params;
   const  data  = req.body;
-  console.log(courseId);
-
+  
   const result = await CourseServices.updateSingleCourseIntoDB(courseId, data);
 
   res.status(200).json({
