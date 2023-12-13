@@ -149,11 +149,11 @@ const getPaginateAndFilteringSearch  = async (req: Request, res: Response) =>{
 const updateSingleCourse = catchAsync(async (req, res) =>  {
  try {
   
-  const { id } = req.params;
+  const { courseId } = req.params;
   const  data  = req.body;
-  console.log(id, data);
+  console.log(courseId);
 
-  const result = await CourseServices.updateSingleCourseIntoDB(id, data);
+  const result = await CourseServices.updateSingleCourseIntoDB(courseId, data);
 
   res.status(200).json({
     statusCode: httpStatus.OK,

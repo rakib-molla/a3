@@ -13,6 +13,6 @@ router.get('/course/best',CourseControllers.getTheBestCourseBasedOnAverageReview
 
 router.get('/courses',CourseControllers.getPaginateAndFilteringSearch);
 
-router.patch('/courses/:id',validateRequest(courseValidationSchema.updateCourseValidationSchema),CourseControllers.updateSingleCourse);
+router.patch('/courses/:courseId',validateRequest(courseValidationSchema.updateCourseValidationSchema),CourseControllers.updateSingleCourse);
 
 export const CourseRoutes = router;
