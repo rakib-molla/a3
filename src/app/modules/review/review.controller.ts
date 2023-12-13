@@ -1,7 +1,9 @@
-import { Request, Response } from "express";
-import { ReviewServices } from "./review.service";
 
-const createReview = async (req: Request, res: Response) => {
+import { ReviewServices } from "./review.service";
+import catchAsync from "../../utils/catchAsync";
+import sendResponse from "../../utils/sendResponse";
+
+const createReview = catchAsync(async (req, res) => {
  try {
    const { rating } = req.body;
    const data = req.body;
@@ -9,7 +11,8 @@ const createReview = async (req: Request, res: Response) => {
    // check rating is lower than five 
    if (rating <= 5) {
      const result = await ReviewServices.creteReviewIntoDB(data);
-     res.status(201).json({
+
+     sendResponse(res,{
        success: true,
        statusCode: 201,
        message: 'Review created successfully',
@@ -31,7 +34,7 @@ const createReview = async (req: Request, res: Response) => {
      data: error,
    });
  }
-};
+});
 
 
 export const ReviewControllers = {

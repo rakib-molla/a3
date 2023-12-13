@@ -1,8 +1,10 @@
 import express  from 'express';
 import { ReviewControllers } from './review.controller';
+import validateRequest from '../../middlewares/validateRequest';
+import { reviewValidationSchema } from './review.validation';
 
 const router = express.Router();
 
-router.post('/reviews',ReviewControllers.createReview);
+router.post('/reviews',validateRequest(reviewValidationSchema.createReviewValidationSchema),ReviewControllers.createReview);
 
 export const ReviewRoutes = router;
