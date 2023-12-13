@@ -145,9 +145,38 @@ const getPaginateAndFilteringSearch  = async (req: Request, res: Response) =>{
 };
 
 
+
+const updateSingleCourse = catchAsync(async (req, res) =>  {
+ try {
+  
+  const { id } = req.params;
+  const  data  = req.body;
+  console.log(id, data);
+
+  const result = await CourseServices.updateSingleCourseIntoDB(id, data);
+
+  res.status(200).json({
+    statusCode: httpStatus.OK,
+    success: true,
+    message: 'Student is updated successfully',
+    data: result,
+  });
+ } catch (error) {
+  res.status(500).json({
+    statusCode: httpStatus.FAILED_DEPENDENCY,
+    success: false,
+    message: 'fail',
+    data: error,
+  });
+ }
+
+});
+
+
 export const CourseControllers = {
   createCourse,
   getSingleCourseByIdWithReviews,
   getTheBestCourseBasedOnAverageReview,
   getPaginateAndFilteringSearch,
+  updateSingleCourse
 };

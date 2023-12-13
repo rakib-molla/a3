@@ -1,5 +1,7 @@
 import  express  from "express";
 import { CourseControllers } from "./course.controller";
+import validateRequest from "../../middlewares/validateRequest";
+import { courseValidationSchema } from "./course.validation";
 
 const router = express.Router();
 
@@ -10,5 +12,7 @@ router.get('/courses/:courseId/reviews',CourseControllers.getSingleCourseByIdWit
 router.get('/course/best',CourseControllers.getTheBestCourseBasedOnAverageReview);
 
 router.get('/courses',CourseControllers.getPaginateAndFilteringSearch);
+
+router.patch('/courses/:id',validateRequest(courseValidationSchema.updateCourseValidationSchema),CourseControllers.updateSingleCourse);
 
 export const CourseRoutes = router;
