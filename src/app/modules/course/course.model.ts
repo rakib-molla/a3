@@ -33,6 +33,9 @@ const courseSchema = new Schema<TCourse>({
  durationInWeeks: {type: Number},
  details: detailsSchema
 
-})
+},
+{
+ timestamps: true,
+},)
 
 export const Course = model<TCourse>('course', courseSchema)

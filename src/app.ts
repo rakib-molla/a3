@@ -4,6 +4,7 @@ import cors from 'cors';
 
 import router from './app/routes/index';
 import notFound from './app/middlewares/notFound';
+import globalErrorHandler from './app/middlewares/globalErrorHandler';
 
 const app: Application = express();
 // const port = 3000;
@@ -35,5 +36,6 @@ const getAController = (req: Request, res: Response) => {
 
 app.get('/', getAController);
 app.use(notFound);
+app.use(globalErrorHandler);
 
 export default app;

@@ -14,7 +14,11 @@ const reviewSchema = new Schema<TReview>({
   max: 5,
  },
  review:{type: String, min:1, max: 5}
-})
+},
+{
+ timestamps: true,
+},
+)
 
 
 

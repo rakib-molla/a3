@@ -28,13 +28,13 @@ export const createCourseValidationSchema = z.object({
   instructor: z.string(),
   categoryId: z.string(),
   price: z.number(),
-  // tags: z.array(tagsValidationSchema),
-   tags: z.array(
-    z.object({
-      name: z.string(),
-      isDeleted: z.boolean(),
-    })
-  ),
+  tags: z.array(tagsValidationSchema),
+  //  tags: z.array(
+  //   z.object({
+  //     name: z.string(),
+  //     isDeleted: z.boolean(),
+  //   })
+  // ),
 
   startDate: z.string(),
   endDate: z.string(),
