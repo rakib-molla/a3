@@ -147,28 +147,19 @@ const getPaginateAndFilteringSearch  = async (req: Request, res: Response) =>{
 
 
 const updateSingleCourse = catchAsync(async (req, res) =>  {
- try {
-  
+ 
   const { courseId } = req.params;
   const  data  = req.body;
   
   const result = await CourseServices.updateSingleCourseIntoDB(courseId, data);
 
-  res.status(200).json({
+  sendResponse(res,{
     statusCode: httpStatus.OK,
     success: true,
     message: 'Student is updated successfully',
     data: result,
   });
- } catch (error) {
-  res.status(500).json({
-    statusCode: httpStatus.FAILED_DEPENDENCY,
-    success: false,
-    message: 'fail',
-    data: error,
-  });
- }
-
+ 
 });
 
 
